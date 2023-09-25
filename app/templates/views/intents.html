@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/data_styles.css'%}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome/css/all.css'%}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link rel="shortcut icon" href="">
+        <title>Datenbank-Management</title>
+    </head>
+    <body>
+        <main>
+            <div class="content">
+                <a href="../" class="back-button">
+                    <i class="fa-solid fa-angle-left fa-lg"></i>
+                </a>
+                
+                <h3 id="intents-headline">{{group_name}}</h3>
+                <br>
+                
+                <div class="buttons">
+                    <div class="add">
+                        <button id="add-new-intent"><i title="Add FAQ" class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <input type="text" class="input-search" id="input-search-intents" onkeyup="filter_intents()" placeholder="Type to Search...">
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h4 id="modal-create-intent-headline">Create new intent</h4>
+                            <input type="textfield" name="newintent" id="new-Data-intent" placeholder="" />
+                            <br>
+                            <input type="submit" value="Create" id="sub-new-intent"/>
+                        </div>
+                    </div>
+                    <div id="myModal2" class="modal">
+                        <div class="modal-content assign-group">
+                            <span class="close">&times;</span>
+                            <h4 id="modal-create-intent-headline">Assign group</h4>
+                            <input type="button" id="assign-intent" value="">
+                            <br>
+                            <div class="dropdown-assign">
+                                
+                                <input type="text" id="assign-intent-text" value="" name="name">
+                                <label for="groups">Choose a group:</label>
+                                <select name="group" id="group-dropdown" required>
+                                    <option value="" disabled selected>Select new group</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
+                            
+                            <br>
+                            <input type="button" value="Assign" id="sub-new-group" class="assign-button"/>
+                        </div>
+                    </div>
+                    <div class="edit">
+                        <button id="edit-intent" class="edit-button">Edit</button>
+                    </div>
+                </div>
+                <br>
+                <div class="faq">
+                    <ul id="faq-list">
+                        
+                    </ul>
+                    <input type="text" id="selected-intent" name="intentName" value=""/>
+                </div>
+                <input type="text" id="saved-intents" value="" name="changes" />
+                <input type="submit" id="submit-edit" value="Speichern" />
+            </div>
+        </main>
+    </body>
+    <script>
+        let token = '{{ csrf_token }}';
+        let intents =[]
+        let groups = []
+        {% for intent in all_intents %}
+            intents.push({"intent": "{{intent.intent}}", "id": {{intent.id}}})
+        {% endfor %}
+        {% for group in all_groups %}
+            groups.push({"name": "{{group.name}}", "id": {{group.id}}})
+        {% endfor %}
+     
+    </script>
+    <script type="text/javascript" src="{% static '/scripts/toastify.js'%}"></script>
+    <script>
+        let err = "error"
+        sessionStorage.setItem(err, '{{error}}')
+        
+    if('{{ error }}' != "no_error"){
+        Toastify({
+            text: '{{error}}',
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+            background: "red",
+            },
+        }).showToast();
+    }
+    </script>
+    <script type="text/javascript" src="{% static '/scripts/intents.js'%}"></script>
+</html>

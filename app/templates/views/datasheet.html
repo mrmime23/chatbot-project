@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/data_styles.css'%}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome/css/all.css'%}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link rel="shortcut icon" href="">
+        <title>Datenbank-Management</title>
+    </head>
+    <body>
+        <main>
+            <div class="content">
+                <h3 id="intents-headline">Groups</h3>
+                <br> 
+                <div class="buttons">
+                    <div class="add">
+                        <button id="add-new-group"><i title="Add Group" class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <input type="text" class="input-search" id="input-search-groups" onkeyup="filter_groups()" placeholder="Type to Search...">
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h4 id="modal-create-intent-headline">Create new group</h4>
+                            <input type="textfield" name="newGroup" id="new-Data-group" placeholder="" />
+                            <br>
+                            <input type="button" value="Create" id="sub-new-group"/>
+                        </div>
+                    </div>
+                    <div class="edit">
+                        <button id="edit-group" class="edit-button">Edit</button>
+                    </div>
+                </div>
+                <br>
+                <div class="faq">
+                    <ul id="group-list">
+                        
+                    </ul>
+                </div>
+                    <input type="text" id="saved-group" value="" name="changes" />
+                    <input type="button" id="submit-edit" value="Speichern" />
+            </div>
+         
+           
+        </main>
+    </body>
+    
+    <script type="text/javascript" src="{% static '/scripts/toastify.js'%}"></script>
+    <script>
+        let groups = []
+         {% for group in all_groups %}
+               groups.push({"name": "{{group.name}}", "id": {{group.id}}})
+            {% endfor %}
+        let token = '{{ csrf_token }}';
+        if('{{ error }}' != "no_error"){
+            Toastify({
+                text: '{{error}}',
+                duration: 3000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                background: "red",
+                offset: {x: 0, y: 0}
+                },
+            }).showToast();
+        }
+  </script>
+  <script type="text/javascript" src="{% static '/scripts/groups.js'%}"></script>
+</html>

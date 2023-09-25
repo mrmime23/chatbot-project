@@ -1,0 +1,402 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+main {
+  
+    min-width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    margin-top: 5%;
+    width: 60%;
+    max-height: 50%;
+}
+
+.buttons{
+    display: flex;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#edit-faq{
+    position: absolute;
+    right:0;
+}
+
+.faq{
+    background: #e7e7e7;
+    box-shadow: 2px 2px 6px #888888;
+    
+}
+
+#faq-list, #group-list{
+    list-style: none;
+}
+
+#faq-list li, #group-list li{
+    padding: 10px 0;
+    text-align: center;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    height: 70%;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    height: 200px;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #selected-intent, #selected-group{
+    display: none;
+  }
+
+  #patterns-list, #responses-list{
+    list-style: none;
+    background-color: #D8D8D8;
+  }
+
+  .patterns, .responses{
+    text-align: center;
+  }
+
+  .headline{
+    display: flex;
+    position: relative;
+    justify-content: center;
+  }
+
+  #add-new-pattern, #add-new-response{
+    position: absolute;
+    left: 0;
+  }
+
+  #edit-pattern, #edit-response, #edit-group, #edit-intent{
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12%;
+    min-height: 25px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    background: #e7e7e7;
+    color: inherit;
+    border: none;
+    font: inherit;
+    box-shadow: 2px 2px 6px #888888;
+  }
+  #edit-pattern:hover, #edit-response:hover, #edit-group:hover, #edit-intent:hover, #submit-edit:hover{
+    background-color: #008CBA;
+  }
+
+  #submit-edit{
+    width: 12%;
+    min-height: 25px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    background: #e7e7e7;
+    color: inherit;
+    border: none;
+    font: inherit;
+    box-shadow: 2px 2px 6px #888888;
+  }
+
+  #responses-box{
+    margin-top: 15%;
+  }
+
+  #patterns-list li, #responses-list li{
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    display: flex;
+    position: relative;
+  }
+
+  #submit-edit{
+    float:right;
+    margin-top: 20px;
+    display: none;
+  }
+
+  #pr-name, #saved-changes_patterns, #saved-changes_responses, #saved-intents, #saved-group, .deleteResponses-button, .deletePatterns-button, .deleteintents-button, .deleteGroups-button, .add-group{
+    display: none;
+  }
+
+  #patterns-list li input[type=button], #responses-list li input[type=button]{
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    display: inline-block;
+	width: 100%;
+    height: 100%;
+    box-sizing:border-box
+  }
+
+  #patterns-list li input[type=text], #responses-list li input[type=text]{
+    width: 75%;
+    margin-right: 15%;
+    margin-left: 10px;
+  }
+
+  #intents-headline{
+    text-align: center;
+  }
+
+  #modal-create-headline{
+    margin-bottom: 10px;
+  }
+
+  #new-Data{
+    width: 80%;
+    min-height: 50px;
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+  }
+
+  #create-new-intent,  #create-new-group{
+    position: relative;
+    height: 70%;
+  }
+
+  #new-Data-intent, #new-Data-group{
+    width: 80%;
+    min-height: 50px;
+    margin-bottom: 10px;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #sub-new-intent, #sub-new-group{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #modal-create-intent-headline, #modal-create-group-headline{
+    text-align: center;
+  }
+
+  .intents, .groups{
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    display: flex;
+  }
+
+  #faq-list li input[type=button],  #group-list li input[type=button]{
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+	width: 100%;
+    height: 100%;
+    word-wrap: break-word
+  }
+
+  #faq-list li input[type=text], #group-list li input[type=text]{
+    width: 75%;
+    margin-right: 15%;
+    margin-left: 10px;
+  }
+
+  .add-group, .deleteintents-button{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    margin-right: 20px;
+
+  }
+
+  #assign-group{
+    position: relative;
+  }
+
+  #assign-intent{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+
+#assign-group{
+  height: 100%
+}
+
+  .dropdown-assign{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+  }
+
+  #assign-intent-text{
+    display: none;
+  }
+
+
+  .input-search{
+    position: absolute;
+    width: 70%;
+    height: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-color: black;
+    border: solid 0.1rem;
+    background-color: #efefef;
+  }
+
+
+  #error-message{
+    text-align: center;
+    color: red;
+    opacity: 0.7;
+  }
+
+  .textarea {
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 1px 6px;
+  }
+
+  .textarea {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    resize: both;
+    min-height: 40px;
+    line-height: 20px;
+    background-color: white;
+  }
+  
+  .textarea[contenteditable]:empty::before {
+    content: "responses-list-element...";
+    color: gray;
+  }
+
+  .responses-list-element,  .patterns-list-element{
+    text-align: left;
+    margin-left: 10px;
+    white-space: pre-line;
+  }
+
+  .deleting-faq{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    margin: auto auto;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    margin-right: 10px;
+  }
+
+  .responses-list-element, .patterns-list-element{
+    width: 90%;
+  }
+
+  #add-new-group, #add-new-intent, #add-new-pattern, #add-new-response{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    margin: auto auto;
+    position: absolute;
+  } 
+
+
+
+  .back-button{
+    font-size: 1rem;
+  }
+
+  #new-Data-sec{
+    display: none;
+  }
+
+  #PR-label{
+    float: left;
+    margin: 0 0 10px 10px;
+  }
+
+  #patterns-list li:hover, #responses-list li:hover, .intents:hover, .groups:hover{
+    background: rgba(94, 94, 94, 0.7);
+  }
+

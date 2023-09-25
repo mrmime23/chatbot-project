@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/data_styles.css'%}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome/css/all.css'%}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <link rel="shortcut icon" href="">
+        <title>Datenbank-Management</title>
+    </head>
+
+    <body>
+        <main>
+            
+            <div class="content">
+                <a href="../" class="back-button">
+                    <i class="fa-solid fa-angle-left fa-lg"></i>
+                </a>
+                <h3 id="intents-headline">{{intent_name}}</h3>
+                <br><br>
+                <div class="patterns">
+                    <div class="headline">
+                        <button id="add-new-pattern"><i title="Add FAQ" class="fa-solid fa-plus"></i></button>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h4 id="modal-create-headline"></h4>
+                                <input type="textfield" name="newData" id="new-Data-sec"/>
+                                <label id="PR-label" for="new-Data"></label>
+                                <span role="textbox" id="0" class="faq-values textarea responses-list-element" contenteditable="true" id="new-Data"></span>
+                                <input type="textfield" name="pr" id="pr-name" />
+                                <br>
+                                <input type="button" id="create-pr" value="Create" />
+                            </div>
+                        </div>
+                        <h4>Patterns</h4>
+                        <button id="edit-response" class="edit-button">Edit</button>
+                    </div>
+                    <br>
+                    <ul id="patterns-list">
+
+                    </ul>
+                </div>
+                <div class="responses">
+                    <div class="headline" id="responses-box">
+                        <button id="add-new-response"><i title="Add FAQ" class="fa-solid fa-plus"></i></button>
+                        <h4>Responses</h4>
+                        <button id="edit-response" class="edit-button">Edit</button>
+                    </div>
+                    <br>
+                    <ul id="responses-list">
+
+                    </ul>
+                </div>
+                <input type="text" id="saved-changes_patterns" value="" name="changes_patterns" />
+                <input type="text" id="saved-changes_responses" value="" name="changes_responses" />
+                <input type="button" id="submit-edit" value="Speichern" />
+            </div>
+        </main>
+    </body>
+    <script>
+        let patterns = []
+        let responses = []
+        let pat_id = []
+        let res_id = []
+
+        {% for pattern in all_patterns %}
+            patterns.push("{{pattern.text}}")
+            pat_id.push({{pattern.id}})
+        {% endfor %}
+
+        {% for response in all_responses %}
+            responses.push("{{response.text}}")
+            res_id.push({{response.id}})
+        {% endfor %}
+
+    </script>
+
+    <script type="text/javascript" src="{% static '/scripts/toastify.js'%}"></script>
+    <script>
+        let token = '{{ csrf_token }}';
+        if ('{{ error }}' != "no_error"){
+            Toastify({
+                text: '{{ error }}',
+                duration: 3000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                background: "red",
+                },
+            }).showToast();
+        }
+    </script>
+    <script type="text/javascript" src="{% static '/scripts/details.js'%}"></script>
+</html>
